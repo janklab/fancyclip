@@ -1,11 +1,11 @@
-# __myproject__ Release Checklist
+# fancyclip Release Checklist
 
 * Run all the tests.
   * `make test`, duh.
   * Wouldn't hurt to do `make clean && git status && make test`/manual-cleanup, just to be sure.
 * Update and double-check the version number and date in `VERSION`
 * Update the installation instructions in README to use the upcoming new release tarball URL.
-  * Format is: `https://github.com/__myghuser__/__myproject__/releases/download/v<version>/__myproject__-<version>.tar.gz`
+  * Format is: `https://github.com/janklab/fancyclip/releases/download/v<version>/fancyclip-<version>.tar.gz`
 * Regenerate the doco
   * `make doc`
 * Commit all the files changed by the above steps.

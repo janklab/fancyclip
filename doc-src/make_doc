@@ -6,5 +6,7 @@
 
 set -e
 
-mkdir -p ../doc
-cp *.html ../doc
+bundle install >/dev/null
+bundle exec jekyll build
+rm -rf ../doc/*
+cp -R _site/* ../doc

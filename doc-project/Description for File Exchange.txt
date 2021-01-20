@@ -8,9 +8,9 @@ just copy and paste.
 
 Summary:
 
-__myproject_summary__
+Enhanced clipboard copy and paste for Matlab
 
 
 Description:
 
-__myproject_description__
+Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, pasting to Excel as tabular data, and more.

@@ -12,7 +12,7 @@ Version 0.2.3 (in progress)
 Version 0.2.2 (2021-01-19)
 --------------------------
 
-* Fix class name munging for Mypackage* classes
+* Fix class name munging for Fancyclip* classes
 
 Version 0.2.1 (2021-01-19)
 --------------------------

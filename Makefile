@@ -11,18 +11,18 @@
 
 # TODO: Should make dist have a dependency on make doc?
 
-PROGRAM=myproject
+PROGRAM=fancyclip
 VERSION=$(shell cat VERSION)
 DIST=dist/${PROGRAM}-${VERSION}
 DISTFILES=build/Mcode doc lib examples README.md LICENSE CHANGES.txt
 
 .PHONY: test
 test:
-	./dev-kit/launchtests_mypackage
+	./dev-kit/launchtests_fancyclip
 
 .PHONY: build
 build:
-	./dev-kit/build_mypackage
+	./dev-kit/build_fancyclip
 
 .PHONY: doc
 doc:
@@ -36,7 +36,7 @@ m-doc: doc
 
 .PHONY: toolbox
 toolbox: m-doc
-	bash ./dev-kit/package_mypackage_toolbox.sh
+	bash ./dev-kit/package_fancyclip_toolbox.sh
 
 .PHONY: dist
 dist: build m-doc
@@ -48,8 +48,8 @@ dist: build m-doc
 
 .PHONY: java
 java:
-	cd src/java/myproject-java; mvn package
-	cp src/java/myproject-java/target/*.jar lib/java/myproject-java
+	cd src/java/fancyclip-java; mvn package
+	cp src/java/fancyclip-java/target/*.jar lib/java/fancyclip-java
 
 .PHONY: clean
 clean:
