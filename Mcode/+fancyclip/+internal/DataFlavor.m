@@ -89,7 +89,7 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
         humanName = string({this.humanPresentableName})';
         primaryType = string({this.primaryType})';
         subType = string({this.subType})';
-        tbl = table(mimeType, javaMimeType, javaRepresentationClass, humanName, primaryType, subType);
+        tbl = table(mimeType, humanName, primaryType, subType, javaMimeType, javaRepresentationClass);
         fprintf('%s (%s):\n', class(this), size2str(size(this)));
         disp(tbl);
       else
