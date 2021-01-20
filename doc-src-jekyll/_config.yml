@@ -1,0 +1,47 @@
+title: __myproject__ Documentation
+email: __myprojectemail__
+description: Documentation for __myproject__
+
+baseurl: ""
+url: ""
+
+github_username: __myghuser__
+github:
+  repository_nwo: __myghuser__/__myproject__
+forkme_nwo: __myghuser__/__myproject__
+footer-links:
+  github: __myghuser__/__myproject__
+
+permalink: pretty
+
+exclude:
+  - Gemfile*
+  - README.md
+  - make_doc
+
+markdown: kramdown
+theme: jekyll-theme-slate
+highlighter: rouge
+kramdown:
+  syntax_highlighter_opts:
+    default_lang: matlab
+asciidoc: {}
+asciidoctor:
+   base_dir: :docdir
+   safe: unsafe
+   attributes:
+     stem: 
+     imagesdir: /images
+     source-highlighter: pygments
+     pygments-stylesheet: css/asciidoc-pygments.css
+
+keep_files:
+- images
+plugins:
+  - asciidoctor-diagram
+  - jekyll-asciidoc
+  - jekyll-last-modified-at
+  - jekyll-toc          # https://github.com/toshimaru/jekyll-toc
+  - jekyll-sitemap      # https://github.com/jekyll/jekyll-sitemap
+  # Not sure about this one:
+  # - jekyll-paginate

@@ -1,0 +1,13 @@
+language: matlab
+matlab:
+  - R2020a
+  - R2020b
+script:
+  - matlab -batch "addpath dev-kit; launchtests_mypackage"
+  - make test
+  - make dist
+  - make dist
+  - make clean
+  - ./MatlabProjectTemplate/test_project_initialization
+# Remove this if you don't use codecov.io
+after_script: bash <(curl -s https://codecov.io/bash)
