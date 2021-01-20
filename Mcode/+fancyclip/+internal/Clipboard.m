@@ -25,6 +25,11 @@ classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
       this.j = jObj;
     end
     
+    function out = availableDataFlavors(this)
+      jFlavors = this.j.getAvailableDataFlavors;
+      out = fancyclip.internal.DataFlavor.ofJavaArray(jFlavors);
+    end
+    
   end
   
 end

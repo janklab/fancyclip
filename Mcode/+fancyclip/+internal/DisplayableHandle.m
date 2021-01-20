@@ -33,27 +33,47 @@ classdef DisplayableHandle < handle
   % dispstrlib.Displayable
   
   methods
+    
     function disp(this)
-      %DISP Custom display
-      disp(dispstr(this));
+      % Custom display
+      if isscalar(this)
+        disp(dispstr_scalar(this));
+      else
+        strs = dispstrs(this);
+        fancyclip.internal.DispstrHelper.disparray(strs);
+      end
     end
     
     function out = dispstr(this)
-      %DISPSTR Custom display string
+      % Custom display string for this array as a whole.
       if isscalar(this)
-        strs = dispstrs(this);
-        out = strs{1};
+        out = dispstr_scalar(this);
       else
-        out = sprintf('%s %s', dispstrlib.internal.DispstrImpl.size2str(size(this)), class(this));
+        % Default to doing an opaque display, because we don't know if the
+        % object is going to spam whatever context it's in.
+        out = sprintf('<%s %s>', size2str(size(this)), class(this));
       end
     end
     
     function out = dispstrs(this)
-      out = cell(size(this));
+      % Element-wise custom display strings
+      %
+      % Gets the custom display strings for each element of this array, as
+      % opposed to a custom display string
+      % Returns a string array the same size size as this.
+      out = repmat(string(missing), size(this));
       for i = 1:numel(this)
-        out{i} = dispstr_scalar(this(i));
+        out(i) = dispstr_scalar(subsref(this, ...
+          struct('type','()', 'subs',{{i}})));
       end
     end
+    
+  end
+  % Now here are some overrides that let you pass Displayables as arguments to
+  % Matlab's own error(), warning(), and related functions, and they'll
+  % auto-convert into strings that the %s conversion specifier can handle.
+  
+  methods
     
     function error(varargin)
       args = convertDisplayablesToString(varargin);
@@ -78,6 +98,7 @@ classdef DisplayableHandle < handle
     
   end
   
+  
   methods (Access = protected)
     function out = dispstr_scalar(this) %#ok<STOUT>
       error('jl:Unimplemented', ['Subclasses of DisplayableHandle must override ' ...
@@ -85,6 +106,7 @@ classdef DisplayableHandle < handle
         class(this));
     end
   end
+  
 end
 
 function out = convertDisplayablesToString(c)

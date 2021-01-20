@@ -40,7 +40,7 @@ classdef Displayable
         disp(dispstr_scalar(this));
       else
         strs = dispstrs(this);
-        dispstrlib.DispstrHelper.disparray(strs);
+        fancyc.ip.internal..DispstrHelper.disparray(strs);
       end
     end
     

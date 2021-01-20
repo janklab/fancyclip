@@ -60,7 +60,7 @@ switch type
 end
 
 % General case
-if ~isa2(value, type)
+if ~isa(value, type)
     reportBadValue(inputname(1), type, class(value));
 end
 
