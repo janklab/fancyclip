@@ -110,7 +110,7 @@ classdef DisplayableHandle < handle
 end
 
 function out = convertDisplayablesToString(c)
-mustBeA(c, 'cell');
+assert(iscell(c));
 out = c;
 for i = 1:numel(c)
   if isa(c{i}, 'dispstrlib.DisplayableHandle')

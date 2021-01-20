@@ -1,6 +1,8 @@
 classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.internal.DisplayableHandle
   % A Java DataFlavor for data transfer
   
+  %#ok<*PROP>
+  
   properties
     % The underlying java.awt.datatransfer.DataFlavor object
     j
@@ -11,6 +13,7 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
     mimeType
     primaryType
     subType
+    javaRepresentationClass
   end
   
   methods (Static)
@@ -35,6 +38,56 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
       this.j = jObj;
     end
     
+    function out = get.mimeType(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = this(i).j.getMimeType;
+      end
+    end
+    
+    function out = get.javaRepresentationClass(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = this(i).j.getRepresentationClass.getName;
+      end
+    end
+    
+    function out = get.humanPresentableName(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = this(i).j.getHumanPresentableName;
+      end
+    end
+    
+    function out = get.primaryType(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = this(i).j.getPrimaryType;
+      end
+    end
+    
+    function out = get.subType(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = this(i).j.getSubType;
+      end
+    end
+    
+    function disp(this)
+      if iscolumn(this)
+        mimeType = string({this.mimeType})';
+        javaRepresentationClass = string({this.javaRepresentationClass})';
+        humanName = string({this.humanPresentableName})';
+        primaryType = string({this.primaryType})';
+        subType = string({this.subType})';
+        tbl = table(mimeType, javaRepresentationClass, humanName, primaryType, subType);
+        fprintf('%s (%s):\n', class(this), size2str(size(this)));
+        disp(tbl);
+      else
+        disp@fancyclip.internal.DisplayableHandle(this);
+      end
+    end
+     
   end
   
   methods (Access=protected)
@@ -43,7 +96,10 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
       if isempty(this.j)
         out = '<missing>';
       else
-        out = string(this.j.toString);
+        jRepClass = this.j.getRepresentationClass;
+        repJavaClassName = string(jRepClass.getName);
+        out = string(sprintf('<DataFlavor: mimeType=%s, repJavaClass=%s>', ...
+          this.mimeType, repJavaClassName));
       end
     end
     

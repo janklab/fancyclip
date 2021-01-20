@@ -9,6 +9,8 @@ function out = size2str(sz)
 %
 % size2str(size(magic(3)))
 
+assert(isnumeric(sz));
+
 strs = cell(size(sz));
 for i = 1:numel(sz)
 	strs{i} = sprintf('%d', sz(i));
