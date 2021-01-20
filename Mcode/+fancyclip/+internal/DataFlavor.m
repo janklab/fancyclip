@@ -8,9 +8,10 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
     j
   end
   properties (Dependent)
+    mimeType
     defaultRepClass
     humanPresentableName
-    mimeType
+    javaMimeType
     primaryType
     subType
     javaRepresentationClass
@@ -39,6 +40,13 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
     end
     
     function out = get.mimeType(this)
+      out = repmat(string(missing), size(this));
+      for i = 1:numel(this)
+        out(i) = sprintf('%s/%s', this(i).primaryType, this(i).subType);
+      end
+    end
+    
+    function out = get.javaMimeType(this)
       out = repmat(string(missing), size(this));
       for i = 1:numel(this)
         out(i) = this(i).j.getMimeType;
@@ -76,11 +84,12 @@ classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.interna
     function disp(this)
       if iscolumn(this)
         mimeType = string({this.mimeType})';
+        javaMimeType = string({this.javaMimeType})';
         javaRepresentationClass = string({this.javaRepresentationClass})';
         humanName = string({this.humanPresentableName})';
         primaryType = string({this.primaryType})';
         subType = string({this.subType})';
-        tbl = table(mimeType, javaRepresentationClass, humanName, primaryType, subType);
+        tbl = table(mimeType, javaMimeType, javaRepresentationClass, humanName, primaryType, subType);
         fprintf('%s (%s):\n', class(this), size2str(size(this)));
         disp(tbl);
       else
