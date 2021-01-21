@@ -49,22 +49,10 @@ dist: build m-doc
 .PHONY: java
 java:
 	cd src/java/fancyclip-java; mvn package
+	mkdir -p lib/java/fancyclip-java
 	cp src/java/fancyclip-java/target/*.jar lib/java/fancyclip-java
 
 .PHONY: clean
 clean:
 	rm -rf dist/* build doc-src/site doc-src/_site M-doc
 
-# start-template-internal
-
-# This is for MatlabProjectTemplate's internal use. Don't call it yourself.
-.PHONY: rollback-init
-rollback-init:
-	git reset --hard
-	rm -rf M-doc Mcode/+mycoolpackage doc-src/* doc/* \
-	    src/java/MyCoolProject-java \
-			dev-kit/*mycoolpackage* dev-kit/*MyCoolProject* MyCoolProject.mltbx MyCoolProject.prj.in \
-			mycoolpackage*
-	git reset --hard
-
-# end-template-internal
