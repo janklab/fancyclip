@@ -24,7 +24,7 @@ function mustBeA(value, type)
 % must call iscellstr() and check all cell contents.
 
 % Avoid infinite recursion
-assert(ischar(type), 'mypackage:InvalidInput',...
+assert(ischar(type), 'fancyclip:InvalidInput',...
     'type must be a char, but got a %s', class(type));
 
 

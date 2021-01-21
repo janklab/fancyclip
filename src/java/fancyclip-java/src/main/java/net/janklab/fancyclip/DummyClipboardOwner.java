@@ -8,9 +8,6 @@ class DummyClipboardOwner implements ClipboardOwner {
 
   }
   
-  public DummyClipboardOwner(double dummy) {
-
-  }
   
   public void lostOwnership(Clipboard clipboard, Transferable contents) {
     // NOP

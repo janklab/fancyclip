@@ -39,7 +39,7 @@ else
     end
 end
 
-loggerObj = mypackage.logger.Logger.getLogger(callerId);
+loggerObj = fancyclip.logger.Logger.getLogger(callerId);
 
 switch form
     case 'm'
