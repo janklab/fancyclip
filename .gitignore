@@ -8,7 +8,8 @@
 # Build dirs and artifacts
 /build
 /dist
-/target
+*/target
+src/java/fancyclip-java/target
 /*.mltbx
 /coverage
 # Do NOT check the Matlab Toolbox .prj file in to the repo! This file can *not* be

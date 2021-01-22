@@ -130,8 +130,11 @@ classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
     
     function copyTextPlain(this, data)
       txt = this.textPlainRepresentation(data);
-      dataHandler = javax.activation.DataHandler(java.lang.String(txt), "text/plain");
-      this.j.setContents(dataHandler, net.janklab.fancyclip.DummyClipboardOwner);
+      %dataHandler = javax.activation.DataHandler(java.lang.String(txt), "text/plain");
+      dataTransBuf = net.janklab.fancyclip.BufferedTransferable;
+      dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
+      dataTransBuf.addContent(dataFlavor, unicode2native(txt, 'UTF-8'));
+      this.j.setContents(dataTransBuf, net.janklab.fancyclip.DummyClipboardOwner);
     end
     
     function out = textPlainRepresentation(this, data)
