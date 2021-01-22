@@ -3,7 +3,7 @@ matlab:
   - R2020a
   - R2020b
 script:
-  - matlab -batch "addpath dev-kit; launchtests_mypackage"
+  - matlab -batch "addpath dev-kit; launchtests_fancyclip"
   - make test
   - make dist
   - make clean
