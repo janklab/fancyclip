@@ -7,7 +7,7 @@ function initializePackage
 % settings state can handle a `clear classes` gracefully.
 
 % Do not re-initialize if already initialized
-if fancyclip.internal.util.getpackageappdata('initialized')
+if fancyclip.internal.utils.getpackageappdata('initialized')
   return
 end
 
@@ -52,7 +52,7 @@ end
 
 % Mark library as initialized
 
-fancyclip.internal.util.getpackageappdata('initialized');
+fancyclip.internal.utils.setpackageappdata('initialized', true);
 
 end
 

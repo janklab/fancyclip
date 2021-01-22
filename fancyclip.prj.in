@@ -2,7 +2,7 @@
   <configuration file="./fancyclip.prj" location="." name="fancyclip" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>fancyclip</param.appname>
     <param.authnamewatermark>Andrew Janke</param.authnamewatermark>
-    <param.email>andrew.net</param.email>
+    <param.email>andrew@apjanke.net</param.email>
     <param.company></param.company>
     <param.summary>Enhanced clipboard copy and paste for Matlab</param.summary>
     <param.description>Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, pasting to Excel as tabular data, and more.</param.description>
@@ -13,7 +13,7 @@
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.guid>4c81978e-52a8-4987-b9e1-ea8a72fff3be</param.guid>
+    <param.guid>e1ee30d3-3bf3-41be-9a55-52f4d83fd373</param.guid>
     <param.exclude.filters>.git
 .github
 scratch
