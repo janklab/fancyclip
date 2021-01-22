@@ -22,7 +22,7 @@ public class BufferedTransferable implements Transferable {
         return dataBuffer.get(i);
       }
     }
-    throw new RuntimeException("No match for flavor "+flavor+" found.");
+    throw new FancyClipRuntimeException("No match for flavor "+flavor+" found.");
   }
 
   public DataFlavor[] getTransferDataFlavors() {
