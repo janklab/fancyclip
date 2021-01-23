@@ -28,7 +28,7 @@ classdef globals
       persistent val
       if isempty(val)
         versionFile = fullfile(fancyclip.globals.distroot, 'VERSION');
-        val = strtrim(fancyclip.internal.readtext(versionFile));
+        val = strtrim(fancyclip.internal.util.readtext(versionFile));
       end
       out = val;
     end
