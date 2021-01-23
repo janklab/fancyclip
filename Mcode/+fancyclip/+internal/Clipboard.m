@@ -137,6 +137,15 @@ classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
       this.j.setContents(dataTransBuf, net.janklab.fancyclip.DummyClipboardOwner);
     end
     
+    function copyTextHtml(this, data)
+      htmlifier = fancyclip.internal.Htmlifier;
+      htmlText = htmlifier.htmlify(data);
+      dataTransBuf = net.janklab.fancyclip.BufferedTransferable;
+      dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
+      dataTransBuf.addContent(dataFlavor, unicode2native(htmlText, 'UTF-8'));
+      this.j.setContents(dataTransBuf, net.janklab.fancyclip.DummyClipboardOwner);      
+    end
+    
     function out = textPlainRepresentation(this, data)
       if istable(data)
         error('unimplemented')

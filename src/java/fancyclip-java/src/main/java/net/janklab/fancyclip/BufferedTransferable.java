@@ -2,6 +2,7 @@ package net.janklab.fancyclip;
 
 import java.util.*;
 import java.awt.datatransfer.*;
+import java.io.*;
 
 /**
  * A Transferable implementation that just keeps its data in memory.
@@ -19,7 +20,7 @@ public class BufferedTransferable implements Transferable {
   public Object getTransferData(DataFlavor flavor) {
     for (int i = 0; i < flavors.size(); i++) {
       if (flavors.get(i).match(flavor)) {
-        return dataBuffer.get(i);
+        return new ByteArrayInputStream(dataBuffer.get(i));
       }
     }
     throw new FancyClipRuntimeException("No match for flavor "+flavor+" found.");
