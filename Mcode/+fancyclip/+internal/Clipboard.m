@@ -116,34 +116,31 @@ classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
         data
         formats (1,:) string = ["text/plain", "text/html"]
       end
+      buf = net.janklab.fancyclip.BufferedTransferable;
       for format = formats
         if format == "text/plain"
-          this.copyTextPlain(data);
+          this.copyTextPlain(buf, data);
         elseif format == "text/html"
-          this.copyTextHtml(data);
+          this.copyTextHtml(buf, data);
         else
           error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
             format, strjoin(this.validCopyFormats, ', '));
         end
       end
+      this.j.setContents(buf, net.janklab.fancyclip.DummyClipboardOwner);
     end
     
-    function copyTextPlain(this, data)
+    function copyTextPlain(this, buf, data)
       txt = this.textPlainRepresentation(data);
-      %dataHandler = javax.activation.DataHandler(java.lang.String(txt), "text/plain");
-      dataTransBuf = net.janklab.fancyclip.BufferedTransferable;
       dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
-      dataTransBuf.addContent(dataFlavor, unicode2native(txt, 'UTF-8'));
-      this.j.setContents(dataTransBuf, net.janklab.fancyclip.DummyClipboardOwner);
+      buf.addContent(dataFlavor, unicode2native(txt, 'UTF-8'));
     end
     
-    function copyTextHtml(this, data)
+    function copyTextHtml(this, buf, data)
       htmlifier = fancyclip.internal.Htmlifier;
       htmlText = htmlifier.htmlify(data);
-      dataTransBuf = net.janklab.fancyclip.BufferedTransferable;
       dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
-      dataTransBuf.addContent(dataFlavor, unicode2native(htmlText, 'UTF-8'));
-      this.j.setContents(dataTransBuf, net.janklab.fancyclip.DummyClipboardOwner);      
+      buf.addContent(dataFlavor, unicode2native(htmlText, 'UTF-8'));
     end
     
     function out = textPlainRepresentation(this, data)
