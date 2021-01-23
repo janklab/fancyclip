@@ -16,6 +16,8 @@ classdef Htmlifier
       end
     end
     
+    % TODO: Implement htmlifyTableAsTable()
+    
     function out = htmlifyMatrixAsTable(this, x)
       if istable(x)
         error('Tables are not supported');
