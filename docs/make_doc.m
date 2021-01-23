@@ -49,7 +49,10 @@ if action == "preview"
 else
   system2('bundle exec jekyll build');
   if action == "install"
-    rmdir2('../doc', 's');
+    if isfolder('../doc')
+      rmdir2('../doc', 's');
+    end
+    mkdir2('../doc');
     copyfile2('_site/*.*', '../doc');
   end
 end
