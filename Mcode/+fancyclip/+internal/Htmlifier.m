@@ -145,6 +145,7 @@ classdef Htmlifier
     function out = tableStart(this)
       tableStyle = "border: 1px single; border-style: solid; border-color: grey; border-collapse: collapse";
       tableStyle = "border-collapse: collapse";
+      tableStyle = "";
       out = sprintf("<table style=""%s"">", tableStyle);
     end
     
