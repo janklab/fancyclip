@@ -69,6 +69,9 @@ classdef Htmlifier
         strs = mydispstrs(x);
       end
       out = this.escapehtml(strs);
+      if isdatetime(x)
+        out = strcat("<date>", out, "</date>");
+      end
     end
     
     function out = htmlifyStructAsTable(this, s)
@@ -133,6 +136,7 @@ classdef Htmlifier
 
     function out = tableStart(this)
       tableStyle = "border: 1px single; border-style: solid; border-color: grey; border-collapse: collapse";
+      tableStyle = "border-collapse: collapse";
       out = sprintf("<table style=""%s"">", tableStyle);
     end
     
@@ -144,6 +148,7 @@ classdef Htmlifier
         properties (1,1) string = missing
       end
       style = "border: 1px solid grey";
+      style = "";
       if ~ismissing(addStyle)
         style = style + "; " + addStyle;
       end
