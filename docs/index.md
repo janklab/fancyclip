@@ -1,8 +1,6 @@
----
-layout: default
----
 
-# fancyclip Documentation
+<!-- Remove the badges for CI services that you're not going to use. -->
+[![Travis Build Status](https://travis-ci.com/janklab/fancyclip.svg?branch=main)](https://travis-ci.com/github/janklab/fancyclip)  [![CircleCI Build Status](https://circleci.com/gh/janklab/fancyclip.svg?style=shield)](https://circleci.com/gh/janklab/fancyclip) [![Azure Build Status](https://dev.azure.com/janklab/fancyclip/_apis/build/status/janklab.fancyclip?branchName=main)](https://dev.azure.com/janklab/fancyclip/_build/latest?definitionId=1&branchName=main)
 
 Enhanced clipboard copy and paste for Matlab
 
@@ -12,40 +10,32 @@ Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, 
 
 ## Installation
 
+To install fancyclip, download it from the [Releases page](https://github.com/janklab/fancyclip/releases) or clone the [repo](https://github.com/janklab/fancyclip) to get it on your disk. Then add its `Mcode/` folder to your Matlab path.
+
 ## Usage
 
 ### Examples
 
 ```matlab
-classdef SomeClass < SomeOtherClass
+% Load library
+addpath Mcode
 
-  properties
-    x (1,1) double = 42
-    y
-  end
+% Copy stuff to clipboard
 
-  methods
-    function this = SomeClass()
-    end
-  end
+x = magic(4) + rand(4);
+fancyclip.copy(x, "text/html");
 
-end
+s = struct('foo', 42, 'bar', [1 2 3], 'baz', "Hello, world!", 'qux', struct('x', magic(3), 'y', 'Some data', 'z', 1:3));
+fancyclip.copy(s, "text/html");
 
-function anExampleFunction(foo, bar, baz, qux)
-  arguments
-    foo
-    bar (1,1) double
-    baz string = "whatever"
-    qux string = "foo" {mustBeMember(qux, ["foo" "bar" "baz"])}
-  end
+% Paste from clipboard in various formats
 
-  fprintf('Hello, world!\n')
-end
+html = fancyclip.paste('text/html')
+
+% See what's available on the clipboard
+
+fancyclip.availableDataFlavors
 ```
-
-## AsciiDoc
-
-Some of the documentation pages use AsciiDoc. See [here](Use-AsciiDoc/index.html) for an example.
 
 ## Author
 
