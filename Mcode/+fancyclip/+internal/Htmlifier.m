@@ -77,7 +77,7 @@ classdef Htmlifier
       for iEl = 1:numel(s)
         si = s(iEl);
         if numel(s) > 1
-          buf(end+1) = "  <tr>" + this.td("Element "+iEl) + this.td("") + "</tr>";
+          buf(end+1) = "  <tr>" + this.td("Element "+iEl, "", "colspan=2") + "</tr>";
         end
         for iFld = 1:numel(flds)
           fld = flds(iFld);
@@ -136,17 +136,22 @@ classdef Htmlifier
       out = sprintf("<table style=""%s"">", tableStyle);
     end
     
-    function out = td(this, content, addStyle)
+    function out = td(this, content, addStyle, properties)
       arguments
         this
         content (1,1) string
         addStyle (1,1) string = missing
+        properties (1,1) string = missing
       end
       style = "border: 1px solid grey";
       if ~ismissing(addStyle)
         style = style + "; " + addStyle;
       end
-      out = sprintf("<td style=""%s"">%s</td>", style, content);
+      propStr = "";
+      if ~ismissing(properties)
+        propStr = " " + properties;
+      end
+      out = sprintf("<td style=""%s""%s>%s</td>", style, propStr, content);
     end
     
   end
