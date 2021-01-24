@@ -1,6 +1,5 @@
 
-<!-- Remove the badges for CI services that you're not going to use. -->
-[![Travis Build Status](https://travis-ci.com/janklab/fancyclip.svg?branch=main)](https://travis-ci.com/github/janklab/fancyclip)  [![CircleCI Build Status](https://circleci.com/gh/janklab/fancyclip.svg?style=shield)](https://circleci.com/gh/janklab/fancyclip) [![Azure Build Status](https://dev.azure.com/janklab/fancyclip/_apis/build/status/janklab.fancyclip?branchName=main)](https://dev.azure.com/janklab/fancyclip/_build/latest?definitionId=1&branchName=main)
+[![Travis Build Status](https://travis-ci.com/janklab/fancyclip.svg?branch=main)](https://travis-ci.com/github/janklab/fancyclip)
 
 Enhanced clipboard copy and paste for Matlab
 
