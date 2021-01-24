@@ -85,7 +85,7 @@ classdef Htmlifier
         for iFld = 1:numel(flds)
           fld = flds(iFld);
           valHtmlStr = this.htmlify(si.(fld));
-          buf(end+1) = "  <tr>" + this.td(fld+":", "vertical-align:top") + this.td(valHtmlStr) + "</tr>";
+          buf(end+1) = "  <tr>" + this.td(fld+":", "text-align:right; vertical-align:top") + this.td(valHtmlStr) + "</tr>";
         end
       end
       buf(end+1) = "</table>";
