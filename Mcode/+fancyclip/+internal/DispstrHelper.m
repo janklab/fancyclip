@@ -4,7 +4,7 @@ classdef DispstrHelper
     
     function txt = disparray(x)
       strs = dispstrs(x);
-      txt = fancyclip.internal.DispstrImpl.prettyprintArray(strs);
+      txt = fancyclip.internal.Dispstr.prettyprintArray(strs);
       if nargout == 0
         disp(txt)
         clear txt

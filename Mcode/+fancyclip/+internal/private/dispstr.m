@@ -94,7 +94,7 @@ elseif isscalar(x) && (isa(x, 'duration') || isa(x, 'calendarDuration'))
 elseif isscalar(x) && iscategorical(x)
     out = char(x);
 else
-    out = sprintf('%s %s', fancyclip.internal.DispstrImpl.size2str(size(x)), class(x));
+    out = sprintf('%s %s', fancyclip.internal.Dispstr.size2str(size(x)), class(x));
 end
 
 out = string(out);
