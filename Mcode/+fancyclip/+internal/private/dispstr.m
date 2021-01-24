@@ -95,6 +95,10 @@ end
 
 function out = formatArrayOfStrings(strs, brackets)
 if nargin < 2 || isempty(brackets);  brackets = { '[' ']' }; end
+if isscalar(strs)
+  out = strs(1);
+  return
+end
 rowStrs = cell(size(strs,1), 1);
 for iRow = 1:size(strs,1)
     rowStrs{iRow} = strjoin(strs(iRow,:), ' ');

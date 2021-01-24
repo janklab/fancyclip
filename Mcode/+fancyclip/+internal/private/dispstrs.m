@@ -1,4 +1,4 @@
-function out = dispstrs(x)
+function out = dispstrs(x, options)
 %DISPSTRS Display strings for array elements
 %
 % out = dispstrs(x, options)
@@ -36,6 +36,9 @@ function out = dispstrs(x)
 %   dispstrs(magic(3))
 %
 % See also: DISPSTR
+
+if nargin < 2;  options = [];  end
+options = parseOpts(options, {'QuoteStrings',false});
 
 if isempty(x)
 	out = reshape({}, size(x));

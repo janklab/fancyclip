@@ -3,14 +3,33 @@ classdef Htmlifier
   
   %#ok<*AGROW>
   %#ok<*INUSA>
+  %#ok<*MANU>
+  
+  properties
+  end
   
   methods
     
-    function out = htmlify(this, x)
+    function out = htmlify(this, x, format)
+      arguments
+        this
+        x
+        format (1,1) string = "loose"
+      end
       if istable(x)
         out = this.htmlifyTableAsTable(x);
+      elseif isstruct(x)
+        out = this.htmlifyStructAsTable(x);
+      elseif ischar(x)
+        out = this.htmlifyCharArray(x);
+      elseif isscalar(x)
+        out = this.escapehtml(dispstr(x, {'QuoteStrings',true}));
       elseif ismatrix(x)
-        out = this.htmlifyMatrixAsTable(x);
+        if format == "tight"
+          out = this.escapehtml(dispstr(x, {'QuoteStrings',true}));
+        else
+          out = this.htmlifyMatrixAsTable(x);
+        end
       else
         out = this.escapehtml(dispstr(x));
       end
@@ -20,14 +39,18 @@ classdef Htmlifier
     
     function out = htmlifyMatrixAsTable(this, x)
       if istable(x)
-        error('Tables are not supported');
+        error('Table arrays are not supported');
       end
       assert(ismatrix(x));
       cellContents = this.htmlifyArrayElements(x);
       buf = string([]);
-      buf(end+1) = '<table>';
+      buf(end+1) = this.tableStart;
       for iRow = 1:size(x, 1)
-        buf(end+1) = "    <tr> " + strjoin(strcat('<td>', cellContents(iRow,:), '</td>'), ' ') + " </tr>"; 
+        tds = repmat(string(missing), [1 size(x, 2)]);
+        for iCol = 1:size(x, 2)
+          tds(iCol) = this.td(cellContents(iRow,iCol));
+        end
+        buf(end+1) = "    <tr> " + strjoin(tds, ' ') + " </tr>"; 
       end
       buf(end+1) = '</table>';
       out = strjoin(buf, '\n');
@@ -48,6 +71,52 @@ classdef Htmlifier
       out = this.escapehtml(strs);
     end
     
+    function out = htmlifyStructAsTable(this, s)
+      buf = this.tableStart;
+      flds = string(fieldnames(s));
+      for iEl = 1:numel(s)
+        si = s(iEl);
+        if numel(s) > 1
+          buf(end+1) = "  <tr>" + this.td("Element "+iEl) + this.td("") + "</tr>";
+        end
+        for iFld = 1:numel(flds)
+          fld = flds(iFld);
+          valHtmlStr = this.htmlify(si.(fld));
+          buf(end+1) = "  <tr>" + this.td(fld+":", "vertical-align:top") + this.td(valHtmlStr) + "</tr>";
+        end
+      end
+      buf(end+1) = "</table>";
+      out = strjoin(buf, '\n');
+    end
+    
+    function out = htmlifyCharArray(this, c)
+      strs = this.dispstrsChar(c);
+      if isscalar(strs)
+        out = strs(1);
+      elseif ~ismatrix(c)
+        out = sprintf('<%s %s>', size2str(c), class(c));
+      else
+        out = string(['[', strjoin(strs, '; '), ']']);
+      end
+      out = this.escapehtml(out);
+    end
+    
+    function out = dispstrsChar(this, c)
+      strs = string(c);
+      out = repmat(string(missing), size(strs));
+      for i = 1:numel(strs)
+        out(i) = this.escapeChar(strs(i));
+      end
+    end
+    
+    function out = escapeChar(this, c)
+      arguments
+        this
+        c (1,:) char
+      end
+      out = ['''' strrep(c, '''', '''''') ''''];
+    end
+    
     function out = escapehtml(this, strs)
       arguments
         this
@@ -58,6 +127,26 @@ classdef Htmlifier
       for i = 1:numel(strs)
         out(i) = string(org.apache.commons.lang.StringEscapeUtils.escapeHtml(strs(i)));
       end
+    end
+    
+    % HTML construction
+
+    function out = tableStart(this)
+      tableStyle = "border: 1px single; border-style: solid; border-color: grey; border-collapse: collapse";
+      out = sprintf("<table style=""%s"">", tableStyle);
+    end
+    
+    function out = td(this, content, addStyle)
+      arguments
+        this
+        content (1,1) string
+        addStyle (1,1) string = missing
+      end
+      style = "border: 1px solid grey";
+      if ~ismissing(addStyle)
+        style = style + "; " + addStyle;
+      end
+      out = sprintf("<td style=""%s"">%s</td>", style, content);
     end
     
   end
