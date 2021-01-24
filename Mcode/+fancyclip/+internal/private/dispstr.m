@@ -42,6 +42,14 @@ elseif isempty(x)
     else
         out = sprintf('Empty %s %s', dispstrlib.internal.Dispstr.size2str(size(x)), class(x));
     end
+elseif islogical(x)
+  strs = repmat("false", size(x));
+  strs(x) = "true";
+  if isscalar(x)
+    out = strs;
+  else
+    out = formatArrayOfStrings(strs);
+  end
 elseif isnumeric(x)
     if isscalar(x)
         out = num2str(x);
@@ -86,7 +94,7 @@ elseif isscalar(x) && (isa(x, 'duration') || isa(x, 'calendarDuration'))
 elseif isscalar(x) && iscategorical(x)
     out = char(x);
 else
-    out = sprintf('%s %s', dispstrlib.internal.Dispstr.size2str(size(x)), class(x));
+    out = sprintf('%s %s', fancyclip.internal.DispstrImpl.size2str(size(x)), class(x));
 end
 
 out = string(out);

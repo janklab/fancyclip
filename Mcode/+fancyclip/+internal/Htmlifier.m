@@ -4,6 +4,7 @@ classdef Htmlifier
   %#ok<*AGROW>
   %#ok<*INUSA>
   %#ok<*MANU>
+  %#ok<*STRNU>
   
   properties
   end
@@ -90,6 +91,13 @@ classdef Htmlifier
       end
       buf(end+1) = "</table>";
       out = strjoin(buf, '\n');
+    end
+    
+    function out = htmlifyObjectAsTable(this, obj)
+      RAII.warn = fancyclip.internal.util.withwarnoff('MATLAB:structOnObject');
+      % TODO: Remove Constant properties
+      s = builtin('struct', obj);
+      out = this.htmlifyStructAsTable(s);
     end
     
     function out = htmlifyCharArray(this, c)
