@@ -143,8 +143,6 @@ classdef Htmlifier
     % HTML construction
 
     function out = tableStart(this)
-      tableStyle = "border: 1px single; border-style: solid; border-color: grey; border-collapse: collapse";
-      tableStyle = "border-collapse: collapse";
       tableStyle = "";
       out = sprintf("<table style=""%s"">", tableStyle);
     end
@@ -156,7 +154,6 @@ classdef Htmlifier
         addStyle (1,1) string = missing
         properties (1,1) string = missing
       end
-      style = "border: 1px solid grey";
       style = "";
       if ~ismissing(addStyle)
         style = style + "; " + addStyle;
