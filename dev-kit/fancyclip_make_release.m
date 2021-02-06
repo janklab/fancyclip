@@ -20,7 +20,7 @@ arguments
 end
 
 % Enforce SemVer version formatting
-validVersionPat = '^[1-9][0-9]*\.[1-9][0-9]*\.[1-9][0-9]*[+a-zA-Z-]*$';
+validVersionPat = '^[0-9]*\.[0-9]*\.[0-9]*[+a-zA-Z-]*$';
 if isempty(regexp(newVersion, validVersionPat, 'once'))
   error('Invalid version number: "%s". Please use a valid SemVer version number.', newVersion);
 end
