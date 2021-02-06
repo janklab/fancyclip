@@ -1,11 +1,9 @@
 
-[![Travis Build Status](https://travis-ci.com/janklab/fancyclip.svg?branch=main)](https://travis-ci.com/github/janklab/fancyclip)
-
-Enhanced clipboard copy and paste for Matlab
+Superior clipboard copy and paste for Matlab
 
 ## About
 
-Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, pasting to Excel as tabular data, and more.
+Supports copying as HTML or JSON, pasting to Excel as tabular data, copying tables and structs, and more.
 
 ## What it does
 
@@ -63,7 +61,7 @@ Yay, Fancyclip!
 
 ## Installation
 
-To install fancyclip, download it from the [Releases page](https://github.com/janklab/fancyclip/releases) or clone the [repo](https://github.com/janklab/fancyclip) to get it on your disk. Then add its `Mcode/` folder to your Matlab path.
+To install Fancyclip, download it from the [Releases page](https://github.com/janklab/fancyclip/releases) or clone the [repo](https://github.com/janklab/fancyclip) to get it on your disk. Then add its `Mcode/` folder to your Matlab path.
 
 ## Usage
 
@@ -92,7 +90,7 @@ fancyclip.availableDataFlavors
 
 ## Author
 
-fancyclip is written and maintained by [Andrew Janke](https://your-website.com). The project home page is <https://github.com/janklab/fancyclip>.
+Fancyclip is written and maintained by [Andrew Janke](https://your-website.com). The project home page is <https://github.com/janklab/fancyclip>.
 
 ## Acknowledgments
 
