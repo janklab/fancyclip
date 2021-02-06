@@ -3,7 +3,7 @@ Superior clipboard copy and paste for Matlab
 
 ## About
 
-Supports copying as HTML or JSON, pasting to Excel as tabular data, copying tables and structs, and more.
+[Fancyclip](https://github.com/janklab/fancyclip) supports copying Matlab data as HTML or JSON, pasting to Excel as tabular data, copying tables and structs, and more.
 
 ## What it does
 
