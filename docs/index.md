@@ -23,7 +23,7 @@ Darn it, that's not what I wanted!
 Fancyclip can do better:
 
 ```matlab
-fancyclip.copy(mx, "text/html")
+fancyclip.copy(mx)
 ```
 
 ![Results of using fancyclip.copy to Excel](images/excel-copy-matrix-fancyclip.png)
