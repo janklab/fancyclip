@@ -1,7 +1,7 @@
 function fancyclip_make_release(newVersion)
 % Cut a release of fancyclip
 %
-% fancyclip_make_release newVersion
+% fancyclip_make_release <newVersion>
 %
 % This does most of the steps of performing a release for you. It will:
 %    - run the tests
