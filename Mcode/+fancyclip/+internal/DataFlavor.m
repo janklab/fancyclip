@@ -1,4 +1,4 @@
-classdef DataFlavor < fancyclip.internal.FancyclipBaseHandle & fancyclip.internal.DisplayableHandle
+classdef DataFlavor < fancyclip.internal.FancyclipBase & handle & fancyclip.internal.DisplayableHandle
   % A Java DataFlavor for data transfer
   
   %#ok<*PROP>

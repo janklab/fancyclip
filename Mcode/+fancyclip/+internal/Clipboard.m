@@ -1,4 +1,4 @@
-classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
+classdef Clipboard < fancyclip.internal.FancyclipBase & handle
   % Main implementation class for clipboard functionality
   
   %#ok<*INUSL>

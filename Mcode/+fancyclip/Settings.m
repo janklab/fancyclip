@@ -1,4 +1,4 @@
-classdef Settings < fancyclip.internal.FancyclipBaseHandle
+classdef Settings < fancyclip.internal.FancyclipBase & handle
 % Global settings for the fancyclip package
 %
 % Don't use this class directly. If you want to get or set the settings,

@@ -1,4 +1,4 @@
-classdef Htmlifier
+classdef Htmlifier < fancyclip.internal.FancyclipBase
   % Converts Matlab data structures to HTML representations
   
   %#ok<*AGROW>
