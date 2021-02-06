@@ -13,8 +13,7 @@ function copy(data, formats)
 % but this may change in the future.
 %
 % Currently, complex data types like table arrays and struct arrays only support
-% the "text/html" format, so you must specify that when copying tables and
-% structs. This will hopefully be fixed soon.
+% the "text/html" format. This will hopefully be fixed soon.
 arguments
   data
   formats string = ["text/plain" "text/html"]

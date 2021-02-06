@@ -39,7 +39,7 @@ Birthdate = [datetime(1987, 3, 24), datetime(1995, 11, 7), datetime(1976, 7, 4),
 FavoriteNumber = rand([4 1]);
 tbl = table(Name, Birthdate, FavoriteNumber);
 
-fancyclip.copy(tbl, "text/html")
+fancyclip.copy(tbl)
 ```
 
 ![Results of using fancyclip.copy to Excel on a table](images/excel-copy-table-fancyclip.png)
@@ -52,7 +52,7 @@ You can also paste into HTML emails, and use it on things like complicated neste
 s = struct('foo', 42, 'bar', [1 2 3], 'baz', "Hello, world!", 'qux', ...
   struct('x', magic(3), 'y', 'Some data', 'tbl',tbl, 'z', 1:3));
 
-fancyclip.copy(s, "text/html")
+fancyclip.copy(s)
 ```
 
 ![Results of using fancyclip.copy to email on a struct](images/email-copy-struct-fancyclip.png)

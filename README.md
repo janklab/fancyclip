@@ -24,7 +24,7 @@ Darn it, that's not what I wanted!
 Fancyclip can do better:
 
 ```matlab
-fancyclip.copy(mx, "text/html")
+fancyclip.copy(mx)
 ```
 
 ![Results of using fancyclip.copy to Excel](docs/images/excel-copy-matrix-fancyclip.png)
@@ -40,7 +40,7 @@ Birthdate = [datetime(1987, 3, 24), datetime(1995, 11, 7), datetime(1976, 7, 4),
 FavoriteNumber = rand([4 1]);
 tbl = table(Name, Birthdate, FavoriteNumber);
 
-fancyclip.copy(tbl, "text/html")
+fancyclip.copy(tbl)
 ```
 
 ![Results of using fancyclip.copy to Excel on a table](docs/images/excel-copy-table-fancyclip.png)
@@ -53,7 +53,7 @@ You can also paste into HTML emails, and use it on things like complicated neste
 s = struct('foo', 42, 'bar', [1 2 3], 'baz', "Hello, world!", 'qux', ...
   struct('x', magic(3), 'y', 'Some data', 'tbl',tbl, 'z', 1:3));
 
-fancyclip.copy(s, "text/html")
+fancyclip.copy(s)
 ```
 
 ![Results of using fancyclip.copy to email on a struct](docs/images/email-copy-struct-fancyclip.png)
@@ -77,7 +77,7 @@ addpath Mcode
 % Copy stuff to clipboard
 
 x = magic(4) + rand(4);
-fancyclip.copy(x, "text/html");
+fancyclip.copy(x);
 
 s = struct('foo', 42, 'bar', [1 2 3], 'baz', "Hello, world!", 'qux', struct('x', magic(3), 'y', 'Some data', 'z', 1:3));
 fancyclip.copy(s, "text/html");

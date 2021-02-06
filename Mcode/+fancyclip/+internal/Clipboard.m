@@ -118,16 +118,22 @@ classdef Clipboard < fancyclip.internal.FancyclipBase & handle
       end
       buf = net.janklab.fancyclip.BufferedTransferable;
       for format = formats
-        cbData = this.makeCopyData(data, format);
-        if format == "text/plain"
-          dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
-        elseif format == "text/html"
-          dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
-        else
-          error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
-            format, strjoin(this.validCopyFormats, ', '));
+        try
+          cbData = this.makeCopyData(data, format);
+          if format == "text/plain"
+            dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
+          elseif format == "text/html"
+            dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
+          elseif format == "application/json"
+            dataFlavor = java.awt.datatransfer.DataFlavor('application/json');
+          else
+            error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
+              format, strjoin(this.validCopyFormats, ', '));
+          end
+          buf.addContent(dataFlavor, cbData);
+        catch err %#ok<NASGU>
+          % quash - ignore unsupported formats
         end
-        buf.addContent(dataFlavor, cbData);
       end
       this.j.setContents(buf, net.janklab.fancyclip.DummyClipboardOwner);
     end
@@ -140,6 +146,9 @@ classdef Clipboard < fancyclip.internal.FancyclipBase & handle
         htmlifier = fancyclip.internal.Htmlifier;
         htmlText = htmlifier.htmlify(data);
         out = unicode2native(htmlText, 'UTF-8');
+      elseif format == "application/json"
+        jsonText = jsonencode(data);
+        out = unicode2native(jsonText, 'UTF-8');
       else
         error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
           format, strjoin(this.validCopyFormats, ', '));
