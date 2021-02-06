@@ -1,11 +1,3 @@
-If you're going to post your project to MathWorks File Exchange, edit this file to contain what 
-you want to go in the Summary and Description fields of its posting. That way you don't have to worry
-about editing and formatting text in their little text field on the web page, and you'll have a
-history of what you posted. Plus you can edit it ahead of time to your heart's content and then
-just copy and paste.
-
--------------------------------------------------------------------------------
-
 Summary:
 
 Enhanced clipboard copy and paste for Matlab
@@ -13,4 +5,8 @@ Enhanced clipboard copy and paste for Matlab
 
 Description:
 
-Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, pasting to Excel as tabular data, and more.
+Enhanced clipboard copy and paste for Matlab. Supports copying as HTML or JSON, pasting to Excel as tabular data, copying tables and structs, and more.
+
+Matlab's clipboard() function is useful, but limited: it doesn't support structs or tables, and when you copy a matrix and paste it into Excel or similar destinations, you get the mat2str() representation of it, instead of a nice matrix layout. Fancyclip extends Matlab's clipboard() with support for all that stuff.
+
+See details on the home page at https://fancyclip.janklab.net.
