@@ -1,4 +1,4 @@
-classdef Displayable
+classdef (HandleCompatible) Displayable
   % A mix-in class for custom display with dispstr() and dispstrs()
   %
   % To use this, inherit from it, and define a custom dispstrs() method. It
@@ -7,7 +7,7 @@ classdef Displayable
   %
   % Examples:
   %
-  % classdef Birthday < dispstrlib.Displayable
+  % classdef Birthday < Displayable
   %
   %     properties
   %         Month
@@ -28,9 +28,6 @@ classdef Displayable
   %     end
   %
   % end
-  %
-  % See also:
-  % dispstrlib.DisplayableHandle
   
   methods
     
@@ -40,7 +37,7 @@ classdef Displayable
         disp(dispstr_scalar(this));
       else
         strs = dispstrs(this);
-        fancyc.ip.internal..DispstrHelper.disparray(strs);
+        fancyclip.internal.DispstrHelper.disparray(strs);
       end
     end
     

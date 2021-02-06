@@ -1,4 +1,4 @@
-classdef DataFlavor < fancyclip.internal.FancyclipBase & handle & fancyclip.internal.DisplayableHandle
+classdef DataFlavor < fancyclip.internal.FancyclipBase & handle & fancyclip.internal.Displayable
   % A Java DataFlavor for data transfer
   
   %#ok<*PROP>
@@ -93,7 +93,7 @@ classdef DataFlavor < fancyclip.internal.FancyclipBase & handle & fancyclip.inte
         fprintf('%s (%s):\n', class(this), size2str(size(this)));
         disp(tbl);
       else
-        disp@fancyclip.internal.DisplayableHandle(this);
+        disp@fancyclip.internal.Displayable(this);
       end
     end
      
