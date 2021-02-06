@@ -74,10 +74,10 @@ addpath Mcode
 % Copy stuff to clipboard
 
 x = magic(4) + rand(4);
-fancyclip.copy(x, "text/html");
+fancyclip.copy(x);
 
 s = struct('foo', 42, 'bar', [1 2 3], 'baz', "Hello, world!", 'qux', struct('x', magic(3), 'y', 'Some data', 'z', 1:3));
-fancyclip.copy(s, "text/html");
+fancyclip.copy(s);
 
 % Paste from clipboard in various formats
 
