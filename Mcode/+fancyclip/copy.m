@@ -6,7 +6,7 @@ function copy(data, formats)
 % Data is the data you want to copy to the clipboard. It can be a numeric array,
 % strings, a table array, whatever.
 %
-% Format (string) is the list of formats you want to make it available in. This
+% Formats (string) is the list of formats you want to make it available in. This
 % is a list of MIME types, like "text/plain", "text/html", and so on. Defaults
 % to a list of common formats. Currently the default format list is:
 %   ["text/plain", "text/html"]

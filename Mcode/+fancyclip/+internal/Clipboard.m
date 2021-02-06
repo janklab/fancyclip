@@ -118,34 +118,37 @@ classdef Clipboard < fancyclip.internal.FancyclipBaseHandle
       end
       buf = net.janklab.fancyclip.BufferedTransferable;
       for format = formats
+        cbData = this.makeCopyData(data, format);
         if format == "text/plain"
-          this.copyTextPlain(buf, data);
+          dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
         elseif format == "text/html"
-          this.copyTextHtml(buf, data);
+          dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
         else
           error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
             format, strjoin(this.validCopyFormats, ', '));
         end
+        buf.addContent(dataFlavor, cbData);
       end
       this.j.setContents(buf, net.janklab.fancyclip.DummyClipboardOwner);
     end
     
-    function copyTextPlain(this, buf, data)
-      txt = this.textPlainRepresentation(data);
-      dataFlavor = java.awt.datatransfer.DataFlavor('text/plain');
-      buf.addContent(dataFlavor, unicode2native(txt, 'UTF-8'));
-    end
-    
-    function copyTextHtml(this, buf, data)
-      htmlifier = fancyclip.internal.Htmlifier;
-      htmlText = htmlifier.htmlify(data);
-      dataFlavor = java.awt.datatransfer.DataFlavor('text/html');
-      buf.addContent(dataFlavor, unicode2native(htmlText, 'UTF-8'));
+    function out = makeCopyData(this, data, format)
+      if format == "text/plain"
+        txt = this.textPlainRepresentation(data);
+        out = unicode2native(txt, 'UTF-8');
+      elseif format == "text/html"
+        htmlifier = fancyclip.internal.Htmlifier;
+        htmlText = htmlifier.htmlify(data);
+        out = unicode2native(htmlText, 'UTF-8');
+      else
+        error('Unsupported clipboard copy format: "%s". Valid formats are: ', ...
+          format, strjoin(this.validCopyFormats, ', '));
+      end
     end
     
     function out = textPlainRepresentation(this, data)
       if istable(data)
-        error('unimplemented')
+        error('text/plain is not supported for table arrays.')
       else
         out = mat2str(data);
       end
