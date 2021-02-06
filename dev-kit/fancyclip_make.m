@@ -90,8 +90,6 @@ function build_docs
 % Build the generated parts of the doc sources
 RAII.cd = withcd(reporoot); 
 docsDir = fullfile(reporoot, 'docs');
-% README becomes index
-system2('tail -n "+2" README.md > docs/index.md')
 % Copy over examples
 docsExsDir = fullfile(docsDir, 'examples');
 if isfolder(docsExsDir)

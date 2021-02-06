@@ -75,6 +75,34 @@ classdef Htmlifier < fancyclip.internal.FancyclipBase
       end
     end
     
+    function out = htmlifyTableAsTable(this, t)
+      colNames = string(t.Properties.VariableNames);
+      nCols = numel(colNames);
+      colDataReprs = cell(1, nCols);
+      for i = 1:nCols
+        colDataReprs{i} = this.htmlifyArrayElements(t.(colNames{i}));
+      end
+      buf = this.tableStart;
+      buf(end+1) = "<thead>";
+      buf(end+1) = "    <tr>";
+      for colName = colNames
+        buf(end+1) = sprintf('        <th scope="col">%s</th>', this.escapehtml(colName));
+      end
+      buf(end+1) = "    </tr>";
+      buf(end+1) = "</thead>";
+      buf(end+1) = "<tbody>";
+      for iRow = 1:height(t)
+        tds = repmat(string(missing), [1 nCols]);
+        for iCol = 1:width(t)
+          tds(iCol) = sprintf("<td>%s</td>", colDataReprs{iCol}(iRow));
+        end
+        buf(end+1) = sprintf("    <tr> %s </tr>", strjoin(tds, " "));
+      end
+      buf(end+1) = "</tbody>";
+      buf(end+1) = "</table>";
+      out = strjoin(buf, '\n');
+    end
+    
     function out = htmlifyStructAsTable(this, s)
       buf = this.tableStart;
       flds = string(fieldnames(s));
